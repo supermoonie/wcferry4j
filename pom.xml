@@ -10,16 +10,34 @@
     </parent>
     <groupId>com.github.supermoonie</groupId>
     <artifactId>wcferry4j</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>wcferry4j</name>
     <description>wcferry4j</description>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!--formdev-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-extras</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.swinglabs.swingx</groupId>
+            <artifactId>swingx-all</artifactId>
+            <version>1.6.5-1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-swingx</artifactId>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -28,13 +46,6 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,20 +64,95 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <!--debug-->
+        <profile>
+            <id>debug</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <active>debug</active>
+            </properties>
+        </profile>
+        <!--release-->
+        <profile>
+            <id>release</id>
+            <properties>
+                <active>release</active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.4</version>
                 <configuration>
-                    <includeSystemScope>true</includeSystemScope>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <mainClass>com.github.supermoonie.wcferry4j.Wcferry4jApplication</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>1.7.5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <name>wcferry4j</name>
+                            <displayName>wcferry4j</displayName>
+                            <!--                            <runnableJar>./target/${project.build.finalName}.jar</runnableJar>-->
+                            <!-- mandatory -->
+                            <mainClass>com.github.supermoonie.wcferry4j.Wcferry4jApplication</mainClass>
+                            <!-- optional -->
+                            <assetsDir>${basedir}/assets</assetsDir>
+                            <copyDependencies>true</copyDependencies>
+                            <customizedJre>false</customizedJre>
+                            <bundleJre>true</bundleJre>
+                            <generateInstaller>true</generateInstaller>
+                            <administratorRequired>false</administratorRequired>
+                            <platform>auto</platform>
+                            <vmArgs>
+                                <arg>-XX:TieredStopAtLevel=1</arg>
+                                <arg>-Dfile.encoding=UTF-8</arg>
+                                <arg>--add-opens java.desktop/sun.awt=ALL-UNNAMED</arg>
+                                <arg>--add-opens java.desktop/sun.lwawt=ALL-UNNAMED</arg>
+                                <arg>--add-opens java.desktop/sun.lwawt.macosx=ALL-UNNAMED</arg>
+                            </vmArgs>
+                            <winConfig>
+                                <generateMsi>false</generateMsi>
+                                <icoFile>${basedir}/assets/app.ico</icoFile>
+                                <disableDirPage>false</disableDirPage>
+                                <disableProgramGroupPage>false</disableProgramGroupPage>
+                                <disableFinishedPage>false</disableFinishedPage>
+                                <setupLanguages>
+                                    <english>compiler:Default.isl</english>
+                                    <chinese>compiler:Languages\ChineseSimplified.isl</chinese>
+                                </setupLanguages>
+                            </winConfig>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

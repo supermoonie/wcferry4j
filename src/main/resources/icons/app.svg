@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="160" y1="0" x2="160" y2="240" id="gradient-0" gradientTransform="matrix(-0.399999, 0.001276, -0.000934, -0.520478, 128.223984, 126.552263)" spreadMethod="pad">
+      <stop offset="0" style="stop-color: rgb(186, 218, 85);"/>
+      <stop offset="1" style="stop-color: rgb(33, 114, 141);"/>
+    </linearGradient>
+    <path id="t" d="M219 200a117 117 0 1 0 101 115v-128a150 150 0 0 0 88 28v-63a88 88 0 0 1-88-88h-64v252a54 54 0 1 1-37-51z" style="mix-blend-mode:multiply"/>
+  </defs>
+  <rect style="stroke-miterlimit: 1; stroke-width: 0px; fill-rule: nonzero; fill: url(#gradient-0); paint-order: fill;" x="0" y="0" width="128" height="128" rx="30" ry="30"/>
+  <text style="fill: rgb(255, 249, 249); font-family: Arial, sans-serif; font-size: 75px; white-space: pre;" x="11.012" y="89.973">WJ</text>
+</svg>
