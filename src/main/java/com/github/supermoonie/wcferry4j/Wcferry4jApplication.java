@@ -26,13 +26,7 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 
 @Slf4j
-@SpringBootApplication(exclude = {
-        JacksonAutoConfiguration.class,
-        SqlInitializationAutoConfiguration.class,
-        TaskExecutionAutoConfiguration.class,
-        JmxAutoConfiguration.class,
-        SpringApplicationAdminJmxAutoConfiguration.class
-})
+@SpringBootApplication
 @Component
 public class Wcferry4jApplication implements CommandLineRunner {
 
@@ -60,7 +54,6 @@ public class Wcferry4jApplication implements CommandLineRunner {
             // 初始化外观
             lookAndFeel();
             new SpringApplicationBuilder(Wcferry4jApplication.class)
-                    .web(WebApplicationType.NONE)
                     .headless(false)
                     .bannerMode(Banner.Mode.OFF)
                     .run(args);

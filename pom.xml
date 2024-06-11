@@ -121,8 +121,6 @@
                         <configuration>
                             <name>wcferry4j</name>
                             <displayName>wcferry4j</displayName>
-                            <!--                            <runnableJar>./target/${project.build.finalName}.jar</runnableJar>-->
-                            <!-- mandatory -->
                             <mainClass>com.github.supermoonie.wcferry4j.Wcferry4jApplication</mainClass>
                             <!-- optional -->
                             <assetsDir>${basedir}/assets</assetsDir>
